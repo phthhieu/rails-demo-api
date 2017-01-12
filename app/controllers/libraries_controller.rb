@@ -24,7 +24,7 @@ class LibrariesController < ApplicationController
 
   # DELETE /libraries/1
   def destroy
-    @library.destroy
+    @library.destroy!
   end
 
   private
