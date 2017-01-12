@@ -4,7 +4,6 @@ class LibrariesController < ApplicationController
   # GET /libraries
   def index
     @libraries = Library.all
-
     render json: @libraries
   end
 
@@ -46,6 +45,6 @@ class LibrariesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def library_params
-      params.fetch(:library, {})
+      params.require(:library).permit(:name)
     end
 end

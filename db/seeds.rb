@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+lib = Library.create!(name: 'American History')
+Book.create!(library: lib, title: 'The black thriller')
+Book.create!(library: lib, title: 'The dusty world')
