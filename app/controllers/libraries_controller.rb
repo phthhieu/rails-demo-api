@@ -3,33 +3,23 @@ class LibrariesController < ApplicationController
 
   # GET /libraries
   def index
-    @libraries = Library.all
-    render json: @libraries
+    render_success Library.all
   end
 
   # GET /libraries/1
   def show
-    render json: @library
+    render_success @library
   end
 
   # POST /libraries
   def create
-    @library = Library.new(library_params)
-
-    if @library.save
-      render json: @library, status: :created, location: @library
-    else
-      render json: @library.errors, status: :unprocessable_entity
-    end
+    @library = Library.create!(library_params)
+    render_success @library, :created
   end
 
   # PATCH/PUT /libraries/1
   def update
-    if @library.update(library_params)
-      render json: @library
-    else
-      render json: @library.errors, status: :unprocessable_entity
-    end
+    @library.update!(library_params)
   end
 
   # DELETE /libraries/1
@@ -38,13 +28,12 @@ class LibrariesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_library
-      @library = Library.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def library_params
-      params.require(:library).permit(:name)
-    end
+  def set_library
+    @library = Library.find(params[:id])
+  end
+
+  def library_params
+    params.require(:library).permit(:name)
+  end
 end

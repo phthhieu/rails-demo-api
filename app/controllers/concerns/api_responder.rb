@@ -48,20 +48,13 @@ module ApiResponder
     render_error_response("Resource not found" || exception.message, 404)
   end
 
-  RESPONSE_40X.each do |status, message|
-    define_method("return_#{status}") do |exception|
-      log_exception(exception)
-      render_error_response(message || exception.message, status.to_s.to_i)
-    end
-  end
-
   def return_422(exception)
     log_exception(exception)
     error =
       if exception.respond_to? :record
         exception.record.errors.messages
       else
-        build_error(exception.message)
+        exception.message
       end
     render_error_response(error, 422)
   end
