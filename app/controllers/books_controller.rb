@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   # POST /books
   def create
     @book = Book.create!(book_params)
-    render_success @book
+    render_success @book, :created
   end
 
   # PATCH/PUT /books/1
